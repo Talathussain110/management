@@ -1,0 +1,3 @@
+com\patient\management\ManagementApplication.class
+com\patient\management\entity\Patient.class
+com\patient\management\entity\Disease.class
