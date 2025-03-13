@@ -1,84 +1,119 @@
-//package com.patient.management.controller;
-//
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.web.servlet.MockMvc;
-//
-//import com.patient.management.entity.Patient;
-//import com.patient.management.service.PatientService;
-//
-//import java.time.LocalDate;
-//import java.util.Arrays;
-//import java.util.Optional;
-//
-//import static org.mockito.Mockito.*;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-//
-//@WebMvcTest(PatientController.class)
-//class PatientControllerTest {
-//
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @MockBean
-//    private PatientService patientService;
-//
-//    private Patient patient;
-//
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.openMocks(this);
-//        patient = new Patient();
-//        patient.setId(1L);
-//        patient.setName("John Doe");
-//        patient.setDateOfBirth(LocalDate.of(1990, 1, 1));
-//        patient.setEmail("john.doe@example.com");
-//    }
-//
-//    @Test
-//    void testGetAllPatients() throws Exception {
-//        when(patientService.getAllPatients()).thenReturn(Arrays.asList(patient));
-//
-//        mockMvc.perform(get("/api/patients"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].name").value("John Doe"));
-//    }
-//
-//    @Test
-//    void testGetPatientById() throws Exception {
-//        when(patientService.getPatientById(1L)).thenReturn(Optional.of(patient));
-//
-//        mockMvc.perform(get("/api/patients/1"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name").value("John Doe"));
-//    }
-//
-//    @Test
-//    void testCreatePatient() throws Exception {
-//        when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
-//
-//        mockMvc.perform(post("/api/patients")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{\"name\":\"John Doe\",\"dateOfBirth\":\"1990-01-01\",\"email\":\"john.doe@example.com\"}"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name").value("John Doe"));
-//    }
-//
-//    @Test
-//    void testDeletePatient() throws Exception {
-//        doNothing().when(patientService).deletePatientById(1L);
-//
-//        mockMvc.perform(delete("/api/patients/1"))
-//                .andExpect(status().isNoContent());
-//
-//        verify(patientService, times(1)).deletePatientById(1L);
-//    }
-//}
+package com.patient.management.controller;
+
+import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.*;
+
+import com.patient.management.entity.Patient;
+import com.patient.management.service.PatientService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@ExtendWith(MockitoExtension.class)
+class PatientControllerTest {
+
+    @Mock
+    private PatientService patientService;
+
+    @InjectMocks
+    private PatientController patientController;
+
+    private Patient patient;
+
+    @BeforeEach
+    void setUp() {
+        patient = new Patient();
+        patient.setId(1L);
+        patient.setName("Talat Sethar");
+        patient.setDateOfBirth(LocalDate.of(1990, 1, 1));
+        patient.setEmail("talatsether@gmail.com");
+    }
+
+    @Test
+    void testCreatePatient() {
+        when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
+
+        ResponseEntity<Patient> response = patientController.createPatient(patient);
+
+        assertThat(response.getBody()).isEqualTo(patient);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void testGetAllPatients() {
+        List<Patient> patients = Arrays.asList(patient);
+        when(patientService.getAllPatients()).thenReturn(patients);
+
+        ResponseEntity<List<Patient>> response = patientController.getAllPatients();
+
+        assertThat(response.getBody()).hasSize(1);
+        assertThat(response.getBody()).contains(patient);
+    }
+
+    @Test
+    void testGetPatientById_Found() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.of(patient));
+
+        ResponseEntity<Patient> response = patientController.getPatientById(1L);
+
+        assertThat(response.getBody()).isEqualTo(patient);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void testGetPatientById_NotFound() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.empty());
+
+        ResponseEntity<Patient> response = patientController.getPatientById(1L);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+    }
+
+    @Test
+    void testUpdatePatient_Found() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.of(patient));
+        when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
+
+        ResponseEntity<Patient> response = patientController.updatePatient(1L, patient);
+
+        assertThat(response.getBody()).isEqualTo(patient);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void testUpdatePatient_NotFound() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.empty());
+
+        ResponseEntity<Patient> response = patientController.updatePatient(1L, patient);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+    }
+
+    @Test
+    void testDeletePatient_Found() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.of(patient));
+        doNothing().when(patientService).deletePatientById(1L);
+
+        ResponseEntity<Void> response = patientController.deletePatient(1L);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(204);
+    }
+
+    @Test
+    void testDeletePatient_NotFound() {
+        when(patientService.getPatientById(1L)).thenReturn(Optional.empty());
+
+        ResponseEntity<Void> response = patientController.deletePatient(1L);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+    }
+}

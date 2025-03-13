@@ -31,7 +31,7 @@ class DoctorServiceTest {
     void setUp() {
         doctor = new Doctor();
         doctor.setId(1L);
-        doctor.setName("Dr. John Doe");
+        doctor.setName("Dr. Talat Sethar");
         doctor.setSpecialization("Cardiology");
     }
 

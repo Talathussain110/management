@@ -33,9 +33,9 @@ class PatientServiceTest {
         MockitoAnnotations.openMocks(this);
         patient = new Patient();
         patient.setId(1L);
-        patient.setName("John Doe");
+        patient.setName("Talat Sethar");
         patient.setDateOfBirth(LocalDate.of(1990, 1, 1));
-        patient.setEmail("john.doe@example.com");
+        patient.setEmail("talatsethar@gmail.com");
     }
 
     @Test
@@ -43,7 +43,7 @@ class PatientServiceTest {
         when(patientRepository.save(any(Patient.class))).thenReturn(patient);
         Patient savedPatient = patientService.savePatient(patient);
         assertNotNull(savedPatient);
-        assertEquals("John Doe", savedPatient.getName());
+        assertEquals("Talat Sethar", savedPatient.getName());
     }
 
     @Test
@@ -59,7 +59,7 @@ class PatientServiceTest {
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
         Optional<Patient> retrievedPatient = patientService.getPatientById(1L);
         assertTrue(retrievedPatient.isPresent());
-        assertEquals("John Doe", retrievedPatient.get().getName());
+        assertEquals("Talat Sethar", retrievedPatient.get().getName());
     }
 
     @Test
