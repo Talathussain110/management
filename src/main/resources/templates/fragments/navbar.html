@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Navbar Fragment</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <div th:fragment="navbar">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.png" alt="Logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/doctors/new">Add Doctor</a></li>
+                <li><a href="/patients/new">Add Patient</a></li>
+                <li><a href="/doctors">List of Doctors</a></li>
+                <li><a href="/patients">List of Patients</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
