@@ -31,7 +31,7 @@ public class PatientWebController {
 	public String listPatients(Model model) {
 		List<Patient> patients = patientService.getAllPatients();
 		model.addAttribute("patients", patients);
-		return "patient/list"; // patient/list.html
+		return "patient/list-patient"; // patient/list.html
 	}
 
 	// 4. Add patient form with doctor dropdown
@@ -39,7 +39,7 @@ public class PatientWebController {
 	public String newPatientForm(Model model) {
 		model.addAttribute("patient", new Patient());
 		model.addAttribute("doctors", doctorService.getAllDoctors()); // Dropdown for doctors
-		return "patient/form"; // patient/form.html
+		return "patient/add-patient"; // patient/form.html
 	}
 
 	// Save patient (Create & Update)
@@ -47,14 +47,6 @@ public class PatientWebController {
 	public String savePatient(@ModelAttribute Patient patient) {
 		patientService.savePatient(patient);
 		return "redirect:/patients";
-	}
-
-	// Edit patient form
-	@GetMapping("/{id}/edit")
-	public String editPatientForm(@PathVariable Long id, Model model) {
-		patientService.getPatientById(id).ifPresent(patient -> model.addAttribute("patient", patient));
-		model.addAttribute("doctors", doctorService.getAllDoctors()); // Dropdown for doctors
-		return "patient/form"; // patient/form.html for editing
 	}
 
 	// Delete patient

@@ -18,42 +18,35 @@ import com.patient.management.service.PatientService;
 @RequestMapping("/doctors")
 public class DoctorWebController {
 
-	private final DoctorService doctorService;
-	private final PatientService patientService;
+    private final DoctorService doctorService;
+    private final PatientService patientService;
 
-	public DoctorWebController(DoctorService doctorService, PatientService patientService) {
-		this.doctorService = doctorService;
-		this.patientService = patientService;
-	}
+    public DoctorWebController(DoctorService doctorService, PatientService patientService) {
+        this.doctorService = doctorService;
+        this.patientService = patientService;
+    }
 
-	// 2. Get all doctors with their patients in a table
-	@GetMapping
-	public String listDoctors(Model model) {
-		List<Doctor> doctors = doctorService.getAllDoctors();
-		model.addAttribute("doctors", doctors);
-		return "doctor/list"; // doctor/list.html
-	}
+    // 2. Get all doctors with their patients in a table
+    @GetMapping
+    public String listDoctors(Model model) {
+        List<Doctor> doctors = doctorService.getAllDoctors();
+        model.addAttribute("doctors", doctors);
+        return "doctor/list-doctor"; // doctor/list.html
+    }
 
-	// 3. Add doctor form
-	@GetMapping("/new")
-	public String newDoctorForm(Model model) {
-		model.addAttribute("doctor", new Doctor());
-		return "doctor/form"; // doctor/form.html
-	}
+    // 3. Add doctor form
+    @GetMapping("/new")
+    public String newDoctorForm(Model model) {
+        model.addAttribute("doctor", new Doctor());
+        return "doctor/add-doctor"; // doctor/form.html
+    }
 
-	// Save doctor (Create & Update)
-	@PostMapping("/save")
-	public String saveDoctor(@ModelAttribute Doctor doctor) {
-		doctorService.saveDoctor(doctor);
-		return "redirect:/doctors";
-	}
-
-	// Edit doctor form
-	@GetMapping("/{id}/edit")
-	public String editDoctorForm(@PathVariable Long id, Model model) {
-		doctorService.getDoctorById(id).ifPresent(doctor -> model.addAttribute("doctor", doctor));
-		return "doctor/form"; // doctor/form.html for editing
-	}
+    // Save doctor (Create & Update)
+    @PostMapping("/save")
+    public String saveDoctor(@ModelAttribute Doctor doctor) {
+        doctorService.saveDoctor(doctor);
+        return "redirect:/doctors"; // Redirect to the doctors list page
+    }
 
 	// Delete doctor
 	@GetMapping("/{id}/delete")
