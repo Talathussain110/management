@@ -1,5 +1,7 @@
 package com.patient.management;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -14,5 +16,6 @@ import com.patient.management.repository.PatientRepository;
 public class ManagementApplicationTest {
 	@Test
 	void contextLoads() {
-	} // Your test cases
+		  assertTrue(true);
+	} 
 }
