@@ -68,14 +68,14 @@ class PatientControllerIntegrationTest {
 	@Test
 	void testGetAllPatients() throws Exception {
 		Patient patient1 = new Patient();
-		patient1.setName("Alice Smith");
+		patient1.setName("Talat Sethar");
 		patient1.setDateOfBirth(LocalDate.of(1990, 3, 10));
-		patient1.setEmail("alice@example.com");
+		patient1.setEmail("talat@example.com");
 
 		Patient patient2 = new Patient();
-		patient2.setName("Bob Johnson");
+		patient2.setName("Sethar Talat");
 		patient2.setDateOfBirth(LocalDate.of(1980, 8, 22));
-		patient2.setEmail("bob@example.com");
+		patient2.setEmail("sethar@example.com");
 
 		patientRepository.saveAll(List.of(patient1, patient2));
 
@@ -85,38 +85,38 @@ class PatientControllerIntegrationTest {
 	@Test
 	void testGetPatientById() throws Exception {
 		Patient patient = new Patient();
-		patient.setName("Emily Davis");
+		patient.setName("Talat Sethar");
 		patient.setDateOfBirth(LocalDate.of(2000, 7, 1));
-		patient.setEmail("emily@example.com");
+		patient.setEmail("talat@example.com");
 		patient = patientRepository.save(patient);
 
 		mockMvc.perform(get("/api/patients/" + patient.getId())).andExpect(status().isOk())
-				.andExpect(jsonPath("$.name").value("Emily Davis"));
+				.andExpect(jsonPath("$.name").value("Talat Sethar"));
 	}
 
 	@Test
 	void testUpdatePatient() throws Exception {
 		Patient patient = new Patient();
-		patient.setName("John Doe");
+		patient.setName("Talat Sethar");
 		patient.setDateOfBirth(LocalDate.of(1985, 5, 15));
-		patient.setEmail("johndoe@example.com");
+		patient.setEmail("talat@example.com");
 		patient = patientRepository.save(patient);
 
-		patient.setName("John Doe Updated");
-		patient.setEmail("updatedjohndoe@example.com");
+		patient.setName("Talat Sethar Updated");
+		patient.setEmail("updatedtalat@example.com");
 
 		mockMvc.perform(put("/api/patients/" + patient.getId()).contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(patient))).andExpect(status().isOk())
-				.andExpect(jsonPath("$.name").value("John Doe Updated"))
-				.andExpect(jsonPath("$.email").value("updatedjohndoe@example.com"));
+				.andExpect(jsonPath("$.name").value("Talat Sethar Updated"))
+				.andExpect(jsonPath("$.email").value("updatedtalat@example.com"));
 	}
 
 	@Test
 	void testDeletePatient() throws Exception {
 		Patient patient = new Patient();
-		patient.setName("David Lee");
+		patient.setName("Talat Sethar");
 		patient.setDateOfBirth(LocalDate.of(1995, 2, 25));
-		patient.setEmail("davidlee@example.com");
+		patient.setEmail("talat@example.com");
 		patient = patientRepository.save(patient);
 
 		mockMvc.perform(delete("/api/patients/" + patient.getId())).andExpect(status().isNoContent());

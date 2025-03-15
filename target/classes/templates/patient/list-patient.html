@@ -1,0 +1,33 @@
+<!-- patient/list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Patients</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>All Patients</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Doctor Name</th>
+                <th>Doctor Specialization</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.name}">Patient Name</td>
+                <td th:text="${patient.dateOfBirth}">Date of Birth</td>
+                <td th:text="${patient.email}">Email</td>
+                <td th:text="${patient.doctor.name}">Doctor Name</td>
+                <td th:text="${patient.doctor.specialization}">Doctor Specialization</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

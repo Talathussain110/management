@@ -1,3 +1,11 @@
-C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\entity\Disease.java
-C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\entity\Patient.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\service\PatientService.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\controller\DoctorWebController.java
 C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\ManagementApplication.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\controller\DoctorController.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\entity\Doctor.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\repository\DoctorRepository.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\entity\Patient.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\controller\PatientController.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\controller\PatientWebController.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\repository\PatientRepository.java
+C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management\src\main\java\com\patient\management\service\DoctorService.java

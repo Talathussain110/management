@@ -68,7 +68,7 @@ class DoctorControllerIntegrationTest {
 	@Test
 	void testCreateDoctor() throws Exception {
 		Doctor doctor = new Doctor();
-		doctor.setName("Dr. John Doe");
+		doctor.setName("Dr. Marco");
 		doctor.setSpecialization("Cardiology");
 
 		mockMvc.perform(post("/api/doctors").contentType(MediaType.APPLICATION_JSON)
@@ -76,7 +76,7 @@ class DoctorControllerIntegrationTest {
 
 		List<Doctor> doctors = doctorRepository.findAll();
 		assertThat(doctors).hasSize(1);
-		assertThat(doctors.get(0).getName()).isEqualTo("Dr. John Doe");
+		assertThat(doctors.get(0).getName()).isEqualTo("Dr. Marco");
 	}
 
 	@Test
@@ -86,7 +86,7 @@ class DoctorControllerIntegrationTest {
 		doctor1.setSpecialization("Neurology");
 
 		Doctor doctor2 = new Doctor();
-		doctor2.setName("Dr. Bob");
+		doctor2.setName("Dr. Talat");
 		doctor2.setSpecialization("Orthopedics");
 
 		doctorRepository.saveAll(List.of(doctor1, doctor2));
@@ -97,18 +97,18 @@ class DoctorControllerIntegrationTest {
 	@Test
 	void testGetDoctorById() throws Exception {
 		Doctor doctor = new Doctor();
-		doctor.setName("Dr. Smith");
+		doctor.setName("Dr. Talat");
 		doctor.setSpecialization("Dermatology");
 		doctor = doctorRepository.save(doctor);
 
 		mockMvc.perform(get("/api/doctors/" + doctor.getId())).andExpect(status().isOk())
-				.andExpect(jsonPath("$.name").value("Dr. Smith"));
+				.andExpect(jsonPath("$.name").value("Dr. Talat"));
 	}
 
 	@Test
 	void testDeleteDoctor() throws Exception {
 		Doctor doctor = new Doctor();
-		doctor.setName("Dr. Emily");
+		doctor.setName("Dr. Talat");
 		doctor.setSpecialization("Pediatrics");
 		doctor = doctorRepository.save(doctor);
 

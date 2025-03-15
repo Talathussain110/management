@@ -1,0 +1,34 @@
+<!-- patient/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Add Patient</h1>
+    <form th:action="@{/patients/save}" th:object="${patient}" method="post">
+        <label for="name">Patient Name:</label>
+        <input type="text" id="name" th:field="*{name}" required/>
+        <br/>
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required/>
+        <br/>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required/>
+        <br/>
+
+        <label for="doctor">Select Doctor:</label>
+        <select id="doctor" th:field="*{doctor}" required>
+            <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
+        </select>
+        <br/>
+
+        <button type="submit">Add Patient</button>
+    </form>
+</body>
+</html>

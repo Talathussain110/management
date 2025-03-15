@@ -44,24 +44,24 @@ public class PatientWebControllerIntegrationTest {
 	public void testListPatients() throws Exception {
 		// Create a doctor
 		Doctor doctor1 = new Doctor();
-		doctor1.setName("Dr. John");
+		doctor1.setName("Dr. Talat Sethar");
 		doctor1.setSpecialization("Cardiology");
 		doctor1 = doctorService.saveDoctor(doctor1);
 
 		// Create a patient with a dateOfBirth
 		Patient patient1 = new Patient();
-		patient1.setName("John Doe");
-		patient1.setEmail("john.doe@example.com");
+		patient1.setName("Talat Sethar");
+		patient1.setEmail("talat@example.com");
 		patient1.setDoctor(doctor1);
 		patient1.setDateOfBirth(LocalDate.of(1990, 1, 1)); // Add dateOfBirth
 		patient1 = patientService.savePatient(patient1);
 
-		mockMvc.perform(get("/patients")).andExpect(status().isOk()).andExpect(view().name("patient/list"))
+		mockMvc.perform(get("/patients")).andExpect(status().isOk()).andExpect(view().name("patient/list-patient"))
 				.andExpect(model().attributeExists("patients")).andExpect(model().attribute("patients", hasSize(1)))
 				.andExpect(model().attribute("patients",
-						hasItem(allOf(hasProperty("name", is("John Doe")),
-								hasProperty("email", is("john.doe@example.com")),
-								hasProperty("doctor", hasProperty("name", is("Dr. John"))),
+						hasItem(allOf(hasProperty("name", is("Talat Sethar")),
+								hasProperty("email", is("talat@example.com")),
+								hasProperty("doctor", hasProperty("name", is("Dr. Talat Sethar"))),
 								hasProperty("dateOfBirth", is(LocalDate.of(1990, 1, 1))) // Check dateOfBirth
 						))));
 	}
@@ -71,11 +71,11 @@ public class PatientWebControllerIntegrationTest {
 	public void testAddPatient() throws Exception {
 		// Create a doctor
 		Doctor doctor1 = new Doctor();
-		doctor1.setName("Dr. Jane");
+		doctor1.setName("Dr. Talat");
 		doctor1.setSpecialization("Neurology");
 		doctor1 = doctorService.saveDoctor(doctor1);
 
-		mockMvc.perform(post("/patients/save").param("name", "Jane Doe").param("email", "jane.doe@example.com")
+		mockMvc.perform(post("/patients/save").param("name", "Talat Sethar").param("email", "talat@example.com")
 				.param("doctor.id", doctor1.getId().toString()).param("dateOfBirth", "1985-05-10")) // Provide
 																									// dateOfBirth in
 																									// the form of
@@ -88,14 +88,14 @@ public class PatientWebControllerIntegrationTest {
 	public void testDeletePatient() throws Exception {
 		// Create a doctor
 		Doctor doctor1 = new Doctor();
-		doctor1.setName("Dr. John");
+		doctor1.setName("Dr. Talat Sethar");
 		doctor1.setSpecialization("Cardiology");
 		doctor1 = doctorService.saveDoctor(doctor1);
 
 		// Create a patient with a dateOfBirth
 		Patient patient1 = new Patient();
-		patient1.setName("John Doe");
-		patient1.setEmail("john.doe@example.com");
+		patient1.setName("Talat Sethar");
+		patient1.setEmail("talat@example.com");
 		patient1.setDoctor(doctor1);
 		patient1.setDateOfBirth(LocalDate.of(1990, 1, 1)); // Add dateOfBirth
 		patient1 = patientService.savePatient(patient1);

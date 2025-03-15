@@ -162,7 +162,7 @@
 						<include>**/*Test.java</include>
 					</includes>
 					<excludes>
-						<exclude>**/*integration.java</exclude>
+						<exclude>**/*IntegrationTest.java</exclude>
 						<exclude>**/*e2e.java</exclude>
 					</excludes>
 				</configuration>
@@ -180,7 +180,7 @@
 				</executions>
 				<configuration>
 					<includes>
-						<include>**/*integration.java</include>
+						<include>**/*IntegrationTest.java</include>
 						<include>**/*e2e.java</include>
 					</includes>
 				</configuration>

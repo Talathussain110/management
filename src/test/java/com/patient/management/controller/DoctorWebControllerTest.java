@@ -45,7 +45,7 @@ public class DoctorWebControllerTest {
         // Create some sample doctors
         doctor1 = new Doctor();
         doctor1.setId(1L);
-        doctor1.setName("Dr. Smith");
+        doctor1.setName("Dr. Talat Sethar");
         doctor1.setSpecialization("Cardiology");
 
         doctor2 = new Doctor();
@@ -79,7 +79,7 @@ public class DoctorWebControllerTest {
         when(doctorService.saveDoctor(any(Doctor.class))).thenReturn(doctor1);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/doctors/save")
-                        .param("name", "Dr. Smith")
+                        .param("name", "Dr. Talat Sethar")
                         .param("specialization", "Cardiology"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/doctors"));

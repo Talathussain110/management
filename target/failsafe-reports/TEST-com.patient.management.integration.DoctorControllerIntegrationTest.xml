@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.patient.management.integration.PatientWebControllerIntegrationTest" time="0.067" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.patient.management.integration.DoctorControllerIntegrationTest" time="28.85" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -49,7 +49,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\mrfb\AppData\Local\Temp\"/>
     <property name="catalina.home" value="C:\Users\mrfb\AppData\Local\Temp\tomcat.0.10871142097825495194"/>
-    <property name="com.zaxxer.hikari.pool_number" value="3"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="17.0.12"/>
     <property name="user.dir" value="C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management"/>
     <property name="os.arch" value="amd64"/>
@@ -57,7 +57,7 @@
     <property name="PID" value="7724"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
-    <property name="catalina.base" value="C:\Users\mrfb\AppData\Local\Temp\tomcat.0.4210535473126342805"/>
+    <property name="catalina.base" value="C:\Users\mrfb\AppData\Local\Temp\tomcat.0.10871142097825495194"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/mrfb/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_23.0.1.v20241024-1700/jre/bin/server;C:/Users/mrfb/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_23.0.1.v20241024-1700/jre/bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\GitExtensions\;C:\Program Files\Docker\Docker\resources\bin;%JAVA_HOME%\bin;C:\Users\mrfb\AppData\Local\Microsoft\WindowsApps;C:\Users\mrfb\AppData\Local\GitHubDesktop\bin;;C:\Users\mrfb\OneDrive\Desktop;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -66,11 +66,69 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testListPatients" classname="com.patient.management.integration.PatientWebControllerIntegrationTest" time="0.026">
-    <system-out><![CDATA[2025-03-15T03:39:43.239+01:00  INFO 7724 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.patient.management.integration.PatientWebControllerIntegrationTest]: PatientWebControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-03-15T03:39:43.243+01:00  INFO 7724 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.patient.management.ManagementApplication for test class com.patient.management.integration.PatientWebControllerIntegrationTest
+  <testcase name="testDeleteDoctor" classname="com.patient.management.integration.DoctorControllerIntegrationTest" time="1.673">
+    <system-out><![CDATA[03:38:56.052 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+03:38:56.426 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+03:38:56.842 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+03:38:56.844 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+03:38:56.870 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 27.3.1
+  API Version: 1.47
+  Operating System: Docker Desktop
+  Total Memory: 7799 MB
+03:38:56.986 [main] INFO tc.testcontainers/ryuk:0.5.1 -- Creating container for image: testcontainers/ryuk:0.5.1
+03:38:57.208 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+03:38:57.386 [main] INFO tc.testcontainers/ryuk:0.5.1 -- Container testcontainers/ryuk:0.5.1 is starting: 1713a1de2609e429a0ab217a55412b1c0e0d1cd2f42390fe58f4bfa59fa518eb
+03:38:58.065 [main] INFO tc.testcontainers/ryuk:0.5.1 -- Container testcontainers/ryuk:0.5.1 started in PT1.1802308S
+03:38:58.076 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+03:38:58.076 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+03:38:58.077 [main] INFO org.testcontainers.DockerClientFactory -- ?? Docker server version should be at least 1.6.0
+03:38:58.080 [main] INFO tc.mysql:8.1.0 -- Creating container for image: mysql:8.1.0
+03:38:58.274 [main] INFO tc.mysql:8.1.0 -- Container mysql:8.1.0 is starting: bcb7f458873bf165ced75ad922b16c407193fcfaa62798866b1c6f247e885eef
+03:38:58.748 [main] INFO tc.mysql:8.1.0 -- Waiting for database connection to become available at jdbc:mysql://localhost:56463/patientmanagement using query 'SELECT 1'
+03:39:11.076 [main] INFO tc.mysql:8.1.0 -- Container mysql:8.1.0 started in PT12.9957007S
+03:39:11.076 [main] INFO tc.mysql:8.1.0 -- Container is started (JDBC URL: jdbc:mysql://localhost:56463/patientmanagement)
+03:39:11.321 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.patient.management.integration.DoctorControllerIntegrationTest]: DoctorControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:39:11.613 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.patient.management.ManagementApplication for test class com.patient.management.integration.DoctorControllerIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.3)
+
+2025-03-15T03:39:12.758+01:00  INFO 7724 --- [           main] c.p.m.i.DoctorControllerIntegrationTest  : Starting DoctorControllerIntegrationTest using Java 17.0.12 with PID 7724 (started by mrfb in C:\Users\mrfb\Downloads\MyProjectATT\MyProjectATTGit\management)
+2025-03-15T03:39:12.761+01:00  INFO 7724 --- [           main] c.p.m.i.DoctorControllerIntegrationTest  : The following 1 profile is active: "ittest"
+2025-03-15T03:39:14.432+01:00  INFO 7724 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-15T03:39:14.634+01:00  INFO 7724 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 181 ms. Found 2 JPA repository interfaces.
+2025-03-15T03:39:16.056+01:00  INFO 7724 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2025-03-15T03:39:16.075+01:00  INFO 7724 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-15T03:39:16.076+01:00  INFO 7724 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2025-03-15T03:39:16.269+01:00  INFO 7724 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-15T03:39:16.273+01:00  INFO 7724 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3449 ms
+2025-03-15T03:39:16.556+01:00  INFO 7724 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-15T03:39:16.659+01:00  INFO 7724 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
+2025-03-15T03:39:16.664+01:00  INFO 7724 --- [           main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-03-15T03:39:16.965+01:00  INFO 7724 --- [           main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-03-15T03:39:17.227+01:00  INFO 7724 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-15T03:39:17.250+01:00  INFO 7724 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-15T03:39:17.444+01:00  INFO 7724 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b6c740b
+2025-03-15T03:39:17.446+01:00  INFO 7724 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-15T03:39:17.493+01:00  WARN 7724 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-03-15T03:39:17.943+01:00  INFO 7724 --- [           main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-03-15T03:39:19.069+01:00  INFO 7724 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-03-15T03:39:19.350+01:00  INFO 7724 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-15T03:39:20.038+01:00  WARN 7724 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-15T03:39:20.749+01:00  INFO 7724 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring TestDispatcherServlet ''
+2025-03-15T03:39:20.750+01:00  INFO 7724 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-15T03:39:20.752+01:00  INFO 7724 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-03-15T03:39:22.046+01:00  INFO 7724 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 56608 (http) with context path ''
+2025-03-15T03:39:22.063+01:00  INFO 7724 --- [           main] c.p.m.i.DoctorControllerIntegrationTest  : Started DoctorControllerIntegrationTest in 10.06 seconds (process running for 27.174)
 ]]></system-out>
   </testcase>
-  <testcase name="testAddPatient" classname="com.patient.management.integration.PatientWebControllerIntegrationTest" time="0.015"/>
-  <testcase name="testDeletePatient" classname="com.patient.management.integration.PatientWebControllerIntegrationTest" time="0.01"/>
+  <testcase name="testGetDoctorById" classname="com.patient.management.integration.DoctorControllerIntegrationTest" time="0.145"/>
+  <testcase name="testGetAllDoctors" classname="com.patient.management.integration.DoctorControllerIntegrationTest" time="0.087"/>
+  <testcase name="testCreateDoctor" classname="com.patient.management.integration.DoctorControllerIntegrationTest" time="0.128"/>
 </testsuite>
