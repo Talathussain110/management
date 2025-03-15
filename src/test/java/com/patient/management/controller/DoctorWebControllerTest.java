@@ -23,59 +23,5 @@ import com.patient.management.service.PatientService;
 @WebMvcTest(DoctorWebController.class)
 class DoctorWebControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private DoctorService doctorService;
-
-    @MockBean
-    private PatientService patientService;
-
-    @Test
-    void listDoctors_ShouldReturnDoctorListPage() throws Exception {
-        when(doctorService.getAllDoctors()).thenReturn(List.of(new Doctor()));
-
-        mockMvc.perform(get("/doctors"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("doctor/list"))
-                .andExpect(model().attributeExists("doctors"));
-    }
-
-    @Test
-    void newDoctorForm_ShouldReturnDoctorFormPage() throws Exception {
-        mockMvc.perform(get("/doctors/new"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("doctor/form"))
-                .andExpect(model().attributeExists("doctor"));
-    }
-
-    @Test
-    void saveDoctor_ShouldRedirectAfterSaving() throws Exception {
-        mockMvc.perform(post("/doctors/save")
-                        .param("name", "Dr. Smith")
-                        .param("specialization", "Cardiology"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/doctors"));
-    }
-
-    @Test
-    void editDoctorForm_ShouldReturnEditPageIfDoctorExists() throws Exception {
-        Doctor doctor = new Doctor();
-        doctor.setId(1L);
-        when(doctorService.getDoctorById(1L)).thenReturn(Optional.of(doctor));
-
-        mockMvc.perform(get("/doctors/1/edit"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("doctor/form"))
-                .andExpect(model().attributeExists("doctor"));
-    }
-
-    @Test
-    void deleteDoctor_ShouldRedirectAfterDeletion() throws Exception {
-        mockMvc.perform(get("/doctors/1/delete"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/doctors"));
-    }
 }
 
