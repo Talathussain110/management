@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.patient.management.entity.Doctor;
 import com.patient.management.entity.Patient;
 import com.patient.management.service.DoctorService;
 import com.patient.management.service.PatientService;
@@ -44,11 +46,12 @@ public class PatientWebController {
 
 	// Save patient (Create & Update)
 	@PostMapping("/save")
-	public String savePatient(@ModelAttribute Patient patient) {
-		patientService.savePatient(patient);
-		return "redirect:/patients";
+	public String savePatient(@ModelAttribute Patient patient, @RequestParam("doctor") Long doctorId) {
+	    Doctor doctor = doctorService.getDoctorById(doctorId).orElseThrow(() -> new RuntimeException("Doctor not found"));
+	    patient.setDoctor(doctor);  // Manually set the doctor
+	    patientService.savePatient(patient);
+	    return "redirect:/patients";
 	}
-
 	// Delete patient
 	@GetMapping("/{id}/delete")
 	public String deletePatient(@PathVariable Long id) {
