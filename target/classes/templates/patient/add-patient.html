@@ -24,9 +24,9 @@
         <br/>
 
         <label for="doctor">Select Doctor:</label>
-        <select id="doctor" th:field="*{doctor}" required>
-            <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
-        </select>
+<select id="doctor" name="doctor.id" required>
+    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+</select>
         <br/>
 
         <button type="submit">Add Patient</button>
