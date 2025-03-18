@@ -26,7 +26,7 @@ import com.patient.management.service.DoctorService;
 import com.patient.management.service.PatientService;
 
 @WebMvcTest(PatientWebController.class)
-public class PatientWebControllerTest {
+class PatientWebControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -44,7 +44,7 @@ public class PatientWebControllerTest {
 	private Doctor doctor;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		// Create a mock Doctor object
 		doctor = new Doctor();
 		doctor.setId(1L);
@@ -60,7 +60,7 @@ public class PatientWebControllerTest {
 	}
 
 	@Test
-	public void testListPatients() throws Exception {
+	void testListPatients() throws Exception {
 		// Mocking the PatientService to return a list of patients
 		when(patientService.getAllPatients()).thenReturn(Collections.singletonList(patient));
 
@@ -73,7 +73,7 @@ public class PatientWebControllerTest {
 	}
 
 	@Test
-	public void testNewPatientForm() throws Exception {
+	void testNewPatientForm() throws Exception {
 		// Mocking the DoctorService to return a list of doctors
 		when(doctorService.getAllDoctors()).thenReturn(Collections.singletonList(doctor));
 
@@ -99,7 +99,7 @@ public class PatientWebControllerTest {
 //    }
 
 	@Test
-	public void testDeletePatient() throws Exception {
+	void testDeletePatient() throws Exception {
 		// Perform GET request to '/patients/{id}/delete'
 		mockMvc.perform(get("/patients/1/delete")).andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/patients"));

@@ -24,7 +24,7 @@ import com.patient.management.service.DoctorService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DoctorWebControllerIntegrationTest {
+class DoctorWebControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -34,7 +34,7 @@ public class DoctorWebControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void testListDoctors() throws Exception {
+	void testListDoctors() throws Exception {
 		Doctor doctor1 = new Doctor();
 		doctor1.setName("Dr. Marco");
 		doctor1.setSpecialization("Cardiology");
@@ -49,14 +49,14 @@ public class DoctorWebControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void testAddDoctor() throws Exception {
+	void testAddDoctor() throws Exception {
 		mockMvc.perform(post("/doctors/save").param("name", "Dr. Talat").param("specialization", "Neurology"))
 				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/doctors"));
 	}
 
 	@Test
 	@Transactional
-	public void testDeleteDoctor() throws Exception {
+	void testDeleteDoctor() throws Exception {
 		Doctor doctor1 = new Doctor();
 		doctor1.setName("Dr. Talat");
 		doctor1.setSpecialization("Cardiology");

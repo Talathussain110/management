@@ -53,14 +53,14 @@ class DoctorWebControllerE2ETest {
     }
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // Run tests without opening a browser
         driver = new ChromeDriver(options);
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         if (driver != null) {
             driver.quit();
         }

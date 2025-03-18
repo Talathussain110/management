@@ -27,7 +27,7 @@ import com.patient.management.service.PatientService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PatientWebControllerIntegrationTest {
+class PatientWebControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class PatientWebControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void testListPatients() throws Exception {
+	void testListPatients() throws Exception {
 		// Create a doctor
 		Doctor doctor1 = new Doctor();
 		doctor1.setName("Dr. Talat Sethar");
@@ -53,7 +53,7 @@ public class PatientWebControllerIntegrationTest {
 		patient1.setEmail("talat@example.com");
 		patient1.setDoctor(doctor1);
 		patient1.setDateOfBirth(LocalDate.of(1990, 1, 1)); // Add dateOfBirth
-		patient1 = patientService.savePatient(patient1);
+		patientService.savePatient(patient1);
 
 		mockMvc.perform(get("/patients")).andExpect(status().isOk()).andExpect(view().name("patient/list-patient"))
 				.andExpect(model().attributeExists("patients")).andExpect(model().attribute("patients", hasSize(1)))
@@ -84,7 +84,7 @@ public class PatientWebControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void testDeletePatient() throws Exception {
+	void testDeletePatient() throws Exception {
 		// Create a doctor
 		Doctor doctor1 = new Doctor();
 		doctor1.setName("Dr. Talat Sethar");

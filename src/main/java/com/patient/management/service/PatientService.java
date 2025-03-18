@@ -37,9 +37,5 @@ public class PatientService {
         patientRepository.deleteById(id);
     }
 
-    // Get Patients by Doctor ID
-    public List<Patient> getPatientsByDoctorId(Long doctorId) {
-        return patientRepository.findByDoctorId(doctorId);
-    }
 }
 

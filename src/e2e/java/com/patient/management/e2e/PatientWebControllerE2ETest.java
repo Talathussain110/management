@@ -60,7 +60,7 @@ class PatientWebControllerE2ETest {
 	}
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
 		driver = new ChromeDriver(options);
@@ -73,7 +73,7 @@ class PatientWebControllerE2ETest {
 	}
 
 	@AfterEach
-	public void tearDown() {
+	void tearDown() {
 		if (driver != null) {
 			driver.quit();
 		}

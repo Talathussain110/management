@@ -25,7 +25,7 @@ import com.patient.management.service.DoctorService;
 import com.patient.management.service.PatientService;
 
 @WebMvcTest(DoctorWebController.class)
-public class DoctorWebControllerTest {
+class DoctorWebControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -43,7 +43,7 @@ public class DoctorWebControllerTest {
 	private Doctor doctor2;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		MockitoAnnotations.openMocks(this);
 
 		// Create some sample doctors
@@ -59,7 +59,7 @@ public class DoctorWebControllerTest {
 	}
 
 	@Test
-	public void testListDoctors() throws Exception {
+	void testListDoctors() throws Exception {
 		List<Doctor> doctors = Arrays.asList(doctor1, doctor2);
 		when(doctorService.getAllDoctors()).thenReturn(doctors);
 
@@ -70,14 +70,14 @@ public class DoctorWebControllerTest {
 	}
 
 	@Test
-	public void testNewDoctorForm() throws Exception {
+	void testNewDoctorForm() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/doctors/new")).andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.view().name("doctor/add-doctor"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("doctor"));
 	}
 
 	@Test
-	public void testSaveDoctor() throws Exception {
+	void testSaveDoctor() throws Exception {
 		when(doctorService.saveDoctor(any(Doctor.class))).thenReturn(doctor1);
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/doctors/save").param("name", "Dr. Talat Sethar")
@@ -88,7 +88,7 @@ public class DoctorWebControllerTest {
 	}
 
 	@Test
-	public void testDeleteDoctor() throws Exception {
+	void testDeleteDoctor() throws Exception {
 		Long doctorId = 1L;
 		doNothing().when(doctorService).deleteDoctorById(doctorId);
 
