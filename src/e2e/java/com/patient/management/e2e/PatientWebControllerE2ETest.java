@@ -34,117 +34,115 @@ import com.patient.management.service.PatientService;
 @Testcontainers
 class PatientWebControllerE2ETest {
 
-    @Container
-    public static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.1.0")
-            .withUsername("patientmanagement")
-            .withPassword("patientmanagement")
-            .withDatabaseName("patientmanagement");
+	@Container
+	public static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.1.0")
+			.withUsername("patientmanagement").withPassword("patientmanagement").withDatabaseName("patientmanagement");
 
-    @LocalServerPort
-    private int port;
+	@LocalServerPort
+	private int port;
 
-    @Autowired
-    private DoctorService doctorService;
+	@Autowired
+	private DoctorService doctorService;
 
-    @Autowired
-    private PatientService patientService;
+	@Autowired
+	private PatientService patientService;
 
-    private WebDriver driver;
-    private Doctor testDoctor;
+	private WebDriver driver;
+	private Doctor testDoctor;
 
-    @DynamicPropertySource
-    static void databaseProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mySQLContainer::getUsername);
-        registry.add("spring.datasource.password", mySQLContainer::getPassword);
-        registry.add("spring.jpa.hibernate.ddl-auto", () -> "update");
-        registry.add("spring.jpa.database-platform", () -> "org.hibernate.dialect.MySQL8Dialect");
-    }
+	@DynamicPropertySource
+	static void databaseProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
+		registry.add("spring.datasource.username", mySQLContainer::getUsername);
+		registry.add("spring.datasource.password", mySQLContainer::getPassword);
+		registry.add("spring.jpa.hibernate.ddl-auto", () -> "update");
+		registry.add("spring.jpa.database-platform", () -> "org.hibernate.dialect.MySQL8Dialect");
+	}
 
-    @BeforeEach
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+	@BeforeEach
+	public void setUp() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+		driver = new ChromeDriver(options);
 
-        // Ensure at least one doctor exists for patient selection
-        testDoctor = new Doctor();
-        testDoctor.setName("Dr. Alice Johnson");
-        testDoctor.setSpecialization("Pediatrics");
-        testDoctor = doctorService.saveDoctor(testDoctor);
-    }
+		// Ensure at least one doctor exists for patient selection
+		testDoctor = new Doctor();
+		testDoctor.setName("Dr. Alice Johnson");
+		testDoctor.setSpecialization("Pediatrics");
+		testDoctor = doctorService.saveDoctor(testDoctor);
+	}
 
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-        patientService.getAllPatients().forEach(patient -> patientService.deletePatientById(patient.getId()));
-        doctorService.getAllDoctors().forEach(doctor -> doctorService.deleteDoctorById(doctor.getId()));
-    }
+	@AfterEach
+	public void tearDown() {
+		if (driver != null) {
+			driver.quit();
+		}
+		patientService.getAllPatients().forEach(patient -> patientService.deletePatientById(patient.getId()));
+		doctorService.getAllDoctors().forEach(doctor -> doctorService.deleteDoctorById(doctor.getId()));
+	}
 
-    @Test
-    void testAddPatient() {
-        // Given: Navigate to the add patient form
-        driver.get("http://localhost:" + port + "/patients/new");
+	@Test
+	void testAddPatient() {
+		// Given: Navigate to the add patient form
+		driver.get("http://localhost:" + port + "/patients/new");
 
-        // When: Fill out the form and submit
-        WebElement nameField = driver.findElement(By.id("name"));
-        nameField.sendKeys("John Doe");
+		// When: Fill out the form and submit
+		WebElement nameField = driver.findElement(By.id("name"));
+		nameField.sendKeys("John Doe");
 
-        WebElement dateOfBirthField = driver.findElement(By.id("dateOfBirth"));
-        dateOfBirthField.sendKeys(LocalDate.of(1990, 5, 15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		WebElement dateOfBirthField = driver.findElement(By.id("dateOfBirth"));
+		dateOfBirthField.sendKeys(LocalDate.of(1990, 5, 15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
-        WebElement emailField = driver.findElement(By.id("email"));
-        emailField.sendKeys("johndoe@example.com");
+		WebElement emailField = driver.findElement(By.id("email"));
+		emailField.sendKeys("johndoe@example.com");
 
-        WebElement doctorDropdown = driver.findElement(By.id("doctor"));
-        doctorDropdown.sendKeys(testDoctor.getName()); // Select the test doctor
+		WebElement doctorDropdown = driver.findElement(By.id("doctor"));
+		doctorDropdown.sendKeys(testDoctor.getName()); // Select the test doctor
 
-        WebElement submitButton = driver.findElement(By.tagName("button"));
-        submitButton.click();
+		WebElement submitButton = driver.findElement(By.tagName("button"));
+		submitButton.click();
 
-        // Then: Verify the patient is added
-        driver.get("http://localhost:" + port + "/patients");
-        WebElement patientTable = driver.findElement(By.tagName("table"));
-        assertThat(patientTable.getText()).contains("John Doe")
-                                          .contains("johndoe@example.com")
-                                          .contains(testDoctor.getName());
-    }
+		// Then: Verify the patient is added
+		driver.get("http://localhost:" + port + "/patients");
+		WebElement patientTable = driver.findElement(By.tagName("table"));
+		assertThat(patientTable.getText()).contains("John Doe").contains("johndoe@example.com")
+				.contains(testDoctor.getName());
+	}
 
-    @Test
-    void testDeletePatient() {
-        // Given: Navigate to the add patient form
-        driver.get("http://localhost:" + port + "/patients/new");
+	@Test
+	void testDeletePatient() {
+		// Given: Navigate to the add patient form
+		driver.get("http://localhost:" + port + "/patients/new");
 
-        // When: Fill out the form and submit
-        WebElement nameField = driver.findElement(By.id("name"));
-        nameField.sendKeys("Talat Sethar");
+		// When: Fill out the form and submit
+		WebElement nameField = driver.findElement(By.id("name"));
+		nameField.sendKeys("Talat Sethar");
 
-        WebElement dateOfBirthField = driver.findElement(By.id("dateOfBirth"));
-        dateOfBirthField.sendKeys(LocalDate.of(1990, 5, 15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		WebElement dateOfBirthField = driver.findElement(By.id("dateOfBirth"));
+		dateOfBirthField.sendKeys(LocalDate.of(1990, 5, 15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
-        WebElement emailField = driver.findElement(By.id("email"));
-        emailField.sendKeys("johndoe@example.com");
+		WebElement emailField = driver.findElement(By.id("email"));
+		emailField.sendKeys("johndoe@example.com");
 
-        WebElement doctorDropdown = driver.findElement(By.id("doctor"));
-        doctorDropdown.sendKeys(testDoctor.getName()); // Select the test doctor
+		WebElement doctorDropdown = driver.findElement(By.id("doctor"));
+		doctorDropdown.sendKeys(testDoctor.getName()); // Select the test doctor
 
-        WebElement submitButton = driver.findElement(By.tagName("button"));
-        submitButton.click();
+		WebElement submitButton = driver.findElement(By.tagName("button"));
+		submitButton.click();
 
-        // When: Delete the patient
-        driver.get("http://localhost:" + port + "/patients");
-        WebElement deleteButton = driver.findElement(By.xpath("//td[contains(text(),'Talat Sethar')]/following-sibling::td/form/button"));
-        deleteButton.click();
+		// When: Delete the patient
+		driver.get("http://localhost:" + port + "/patients");
+		WebElement deleteButton = driver
+				.findElement(By.xpath("//td[contains(text(),'Talat Sethar')]/following-sibling::td/form/button"));
+		deleteButton.click();
 
-        // Handle the confirmation alert
-        Alert alert = driver.switchTo().alert();
-        alert.accept(); // Click "OK" to confirm deletion
+		// Handle the confirmation alert
+		Alert alert = driver.switchTo().alert();
+		alert.accept(); // Click "OK" to confirm deletion
 
-        // Then: Verify the patient is deleted
-        driver.get("http://localhost:" + port + "/patients");
-        WebElement patientTable = driver.findElement(By.tagName("table"));
-        assertThat(patientTable.getText()).doesNotContain("Talat Sethar");
-    }
+		// Then: Verify the patient is deleted
+		driver.get("http://localhost:" + port + "/patients");
+		WebElement patientTable = driver.findElement(By.tagName("table"));
+		assertThat(patientTable.getText()).doesNotContain("Talat Sethar");
+	}
 }

@@ -103,8 +103,9 @@ class DoctorWebControllerE2ETest {
 
         // When: Delete the doctor
         driver.get("http://localhost:" + port + "/doctors");
-        WebElement deleteButton = driver.findElement(By.xpath("//td[contains(text(),'Dr. Talat Sethar')]/following-sibling::td/form/button"));
-        deleteButton.click();
+		WebElement deleteButton = driver
+				.findElement(By.xpath("//td[contains(text(),'Dr. Talat Sethar')]/following-sibling::td/form/button"));
+		deleteButton.click();
 
         // Handle the alert confirmation
         Alert alert = driver.switchTo().alert();

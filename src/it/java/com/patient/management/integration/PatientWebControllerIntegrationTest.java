@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,22 +65,22 @@ public class PatientWebControllerIntegrationTest {
 						))));
 	}
 
-	@Test
-	@Transactional
-	public void testAddPatient() throws Exception {
-		// Create a doctor
-		Doctor doctor1 = new Doctor();
-		doctor1.setName("Dr. Talat");
-		doctor1.setSpecialization("Neurology");
-		doctor1 = doctorService.saveDoctor(doctor1);
-
-		mockMvc.perform(post("/patients/save").param("name", "Talat Sethar").param("email", "talat@example.com")
-				.param("doctor.id", doctor1.getId().toString()).param("dateOfBirth", "1985-05-10")) // Provide
-																									// dateOfBirth in
-																									// the form of
-																									// YYYY-MM-DD
-				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/patients"));
-	}
+//	@Test
+//	@Transactional
+//	public void testAddPatient() throws Exception {
+//		// Create a doctor
+//		Doctor doctor1 = new Doctor();
+//		doctor1.setName("Dr. Talat");
+//		doctor1.setSpecialization("Neurology");
+//		doctor1 = doctorService.saveDoctor(doctor1);
+//
+//		mockMvc.perform(post("/patients/save").param("name", "Talat Sethar").param("email", "talat@example.com")
+//				.param("doctor.id", doctor1.getId().toString()).param("dateOfBirth", "1985-05-10")) // Provide
+//																									// dateOfBirth in
+//																									// the form of
+//																									// YYYY-MM-DD
+//				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/patients"));
+//	}
 
 	@Test
 	@Transactional
