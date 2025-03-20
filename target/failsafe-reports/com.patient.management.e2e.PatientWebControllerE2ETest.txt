@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.patient.management.e2e.PatientWebControllerE2ETest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.165 s - in com.patient.management.e2e.PatientWebControllerE2ETest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.278 s - in com.patient.management.e2e.PatientWebControllerE2ETest

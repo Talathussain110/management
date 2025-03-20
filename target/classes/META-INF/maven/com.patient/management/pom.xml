@@ -163,7 +163,7 @@
 					</includes>
 					<excludes>
 						<exclude>**/*IntegrationTest.java</exclude>
-						<exclude>**/*e2e.java</exclude>
+						<exclude>**/*E2ETest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -181,7 +181,7 @@
 				<configuration>
 					<includes>
 						<include>**/*IntegrationTest.java</include>
-						<include>**/*e2e.java</include>
+						<include>**/*E2ETest.java</include>
 					</includes>
 				</configuration>
 			</plugin>
