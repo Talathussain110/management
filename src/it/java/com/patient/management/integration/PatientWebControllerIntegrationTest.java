@@ -17,17 +17,42 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.patient.management.entity.Doctor;
 import com.patient.management.entity.Patient;
 import com.patient.management.service.DoctorService;
 import com.patient.management.service.PatientService;
 
-@SpringBootTest
+@Testcontainers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@ActiveProfiles("ittest")
 class PatientWebControllerIntegrationTest {
+
+	@Container
+	public static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.1.0")
+			.withUsername("patientmanagement").withPassword("patientmanagement").withDatabaseName("patientmanagement");
+
+	@LocalServerPort
+	private int port;
+
+	@DynamicPropertySource
+	static void databaseProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.jpa.hibernate.ddl-auto", () -> "update");
+		registry.add("spring.jpa.database-platform", () -> "org.hibernate.dialect.MySQL8Dialect");
+		registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
+		registry.add("spring.datasource.username", mySQLContainer::getUsername);
+		registry.add("spring.datasource.password", mySQLContainer::getPassword);
+	}
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -64,23 +89,6 @@ class PatientWebControllerIntegrationTest {
 								hasProperty("dateOfBirth", is(LocalDate.of(1990, 1, 1))) // Check dateOfBirth
 						))));
 	}
-
-//	@Test
-//	@Transactional
-//	public void testAddPatient() throws Exception {
-//		// Create a doctor
-//		Doctor doctor1 = new Doctor();
-//		doctor1.setName("Dr. Talat");
-//		doctor1.setSpecialization("Neurology");
-//		doctor1 = doctorService.saveDoctor(doctor1);
-//
-//		mockMvc.perform(post("/patients/save").param("name", "Talat Sethar").param("email", "talat@example.com")
-//				.param("doctor.id", doctor1.getId().toString()).param("dateOfBirth", "1985-05-10")) // Provide
-//																									// dateOfBirth in
-//																									// the form of
-//																									// YYYY-MM-DD
-//				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/patients"));
-//	}
 
 	@Test
 	@Transactional

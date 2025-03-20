@@ -47,7 +47,7 @@ class PatientWebControllerTest {
 	void setUp() {
 		// Create a mock Doctor object
 		doctor = new Doctor();
-		doctor.setId(1L);
+		doctor.setId(23L);
 		doctor.setName("Dr. Talat Sethar");
 		doctor.setSpecialization("Cardio");
 		// Create a mock Patient object
@@ -83,20 +83,6 @@ class PatientWebControllerTest {
 
 		verify(doctorService, times(1)).getAllDoctors();
 	}
-
-//    @Test
-//    public void testSavePatient() throws Exception {
-//        // Perform POST request to '/patients/save'
-//        mockMvc.perform(post("/patients/save")
-//                        .param("name", "Talat Sethar")
-//                        .param("dateOfBirth", "1990-01-01")
-//                        .param("email", "talat@example.com")
-//                        .param("doctor.id", "1"))  // Setting the doctor ID as part of the form
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/patients"));
-//
-//        verify(patientService, times(1)).savePatient(any(Patient.class));
-//    }
 
 	@Test
 	void testDeletePatient() throws Exception {
