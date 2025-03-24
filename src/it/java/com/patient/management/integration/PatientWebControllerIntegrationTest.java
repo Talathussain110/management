@@ -27,13 +27,14 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import com.patient.management.ManagementApplication;
 import com.patient.management.entity.Doctor;
 import com.patient.management.entity.Patient;
 import com.patient.management.service.DoctorService;
 import com.patient.management.service.PatientService;
 
 @Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = ManagementApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("ittest")
 class PatientWebControllerIntegrationTest {

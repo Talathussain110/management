@@ -25,11 +25,12 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.patient.management.ManagementApplication;
 import com.patient.management.entity.Doctor;
 import com.patient.management.repository.DoctorRepository;
 
 @Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = ManagementApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("ittest")
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
