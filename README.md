@@ -3,6 +3,20 @@
 ## Overview
 The **Patient Management System** is a web application built using **Spring Boot** to manage patient records efficiently. It provides functionalities for adding, updating, and retrieving patient information while ensuring secure and scalable operations.
 
+## Sonar Cloud and CoverAlls Coverage Badge:
+Sonar Cloud: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Talathussain110_management&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Talathussain110_management)
+
+Code coverall: [![Coverage Status](https://coveralls.io/repos/github/Talathussain110/management/badge.svg?branch=main)](https://coveralls.io/github/Talathussain110/management?branch=main)
+
+GithubAction: ![Java CI with Maven](https://github.com/Talathussain110/management/blob/main/.github/workflows/maven.yml)
+
+
 ## Features
 - **Spring Boot Web**: RESTful APIs for handling patient data.
 - **Spring Data JPA**: Integration with MySQL database.
