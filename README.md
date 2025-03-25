@@ -48,12 +48,8 @@ GithubAction: ![Java CI with Maven](https://github.com/Talathussain110/managemen
    git clone <repository_url>
    cd management
    ```
-2. Configure MySQL in `application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/patient_db
-   spring.datasource.username=root
-   spring.datasource.password=your_password
-   ```
+2. Open Docker Desktop:
+   
 3. Build and run the application:
    ```sh
    mvn spring-boot:run
