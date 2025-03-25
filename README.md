@@ -8,7 +8,7 @@ The **Patient Management System** is a web application built using **Spring Boot
 - **Spring Data JPA**: Integration with MySQL database.
 - **Thymeleaf**: UI rendering for web application views.
 - **H2 Database**: In-memory testing.
-- **Selenium**: Automated UI testing.
+- **Selenium**: E2E testing.
 - **TestContainers**: Containerized testing support.
 - **SonarCloud Integration**: Code quality and coverage analysis.
 - **Jacoco & Pitest**: Code coverage and mutation testing.
@@ -55,11 +55,4 @@ The **Patient Management System** is a web application built using **Spring Boot
 - **SonarCloud Analysis**: `mvn sonar:sonar`
 - **Code Coverage Report**: `mvn verify -Pjacoco`
 
-## License
-This project is licensed under the MIT License.
-
-## Contributors
-- Developer: [Your Name]
-
-For any issues or feature requests, please open a ticket in the repository.
 
